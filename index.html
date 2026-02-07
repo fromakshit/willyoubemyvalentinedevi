@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fce4ec; /* Light pink background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Prevent scrolling when button gets huge */
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .gif-container img {
+            max-width: 300px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #4caf50; /* Green */
+            color: white;
+            font-weight: bold;
+        }
+
+        #noBtn {
+            background-color: #f44336; /* Red */
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Success Message Styling */
+        #success-message {
+            display: none;
+            font-size: 2rem;
+            color: #d81b60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="question-section">
+            <div class="gif-container">
+                <img id="mainImage" src="https://media.tenor.com/K2s4c5fP2uAAAAAi/milk-and-mocha-bear.gif" alt="Cute Bear">
+            </div>
+            <h1 id="mainText">Will you be my Valentine?</h1>
+            <div class="buttons">
+                <button id="yesBtn" class="btn">Yes</button>
+                <button id="noBtn" class="btn">No</button>
+            </div>
+        </div>
+
+        <div id="success-message">
+            <div class="gif-container">
+                <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Happy Bear">
+            </div>
+            <h1>Ok yay!!!</h1>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const mainText = document.getElementById('mainText');
+        const questionSection = document.getElementById('question-section');
+        const successMessage = document.getElementById('success-message');
+
+        // Text messages for the "No" button
+        const noTexts = [
+            "Are you sure?",
+            "Really sure?",
+            "Think again!",
+            "Last chance!",
+            "Surely not?",
+            "You might regret this!",
+            "Give it another thought!",
+            "Are you absolutely certain?",
+            "This could be a mistake!",
+            "Have a heart!",
+            "Don't be so cold!",
+            "Change of heart?",
+            "Wouldn't you reconsider?",
+            "Is that your final answer?",
+            "You're breaking my heart ;(",
+            "Is that your final answer?",
+            "You're breaking my heart ;(",
+            "Plsss? :("
+        ];
+
+        let noCount = 0;
+
+        // Function when "No" is clicked
+        noBtn.addEventListener('click', () => {
+            // Change text of the "No" button
+            if (noCount < noTexts.length) {
+                noBtn.innerText = noTexts[noCount];
+            } else {
+                noBtn.innerText = noTexts[noTexts.length - 1]; // Keep showing the last message
+            }
+            noCount++;
+
+            // Make the "Yes" button bigger
+            // We get the current font size and increase it
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            const newSize = currentSize * 1.5; // Grow by 50% each time
+            yesBtn.style.fontSize = `${newSize}px`;
+        });
+
+        // Function when "Yes" is clicked
+        yesBtn.addEventListener('click', () => {
+            // Hide the question section
+            questionSection.style.display = 'none';
+            // Show the success message
+            successMessage.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
